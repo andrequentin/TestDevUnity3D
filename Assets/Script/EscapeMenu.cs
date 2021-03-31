@@ -11,8 +11,8 @@ public class EscapeMenu : MonoBehaviour
     {
         this.gameObject.SetActive(false);
     }
-    public void BackToMenu()
+    public void Quit()
     {
-        SceneManager.LoadScene("Menu");
+        Application.Quit();
     }
 }
