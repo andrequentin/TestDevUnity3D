@@ -178,7 +178,7 @@ public class RecipeFormular : MonoBehaviour
         //Handling two error cases
         if (request.result == UnityWebRequest.Result.ConnectionError || request.result == UnityWebRequest.Result.ProtocolError)
         {
-            Debug.Log("Erreur : " + request.result.ToString());
+            Debug.Log("Erreur : " + request.result.ToString() +"with : " + q);
         }else
         {
             //We Deserialize our JSON string into our Object
@@ -234,11 +234,14 @@ public class RecipeFormular : MonoBehaviour
 
     public void SetPageHandler(PuppyRequestRoot prr)
     {
-        GameObject GoPG = Instantiate(PageHandlerPrefab, searchResultList.transform);
-        //Load the PageHandler Prefab and Build it
-        GoPG.GetComponent<PageHandler>().Build(currentPage, (prr.results.Count > 0), this);
-        currentSearchResults.Add(GoPG);
-        //We put in the search result list so it get clean/rebuild on the next Search
+        if (prr.title!=null)
+        {
+            GameObject GoPG = Instantiate(PageHandlerPrefab, searchResultList.transform);
+            //Load the PageHandler Prefab and Build it
+            GoPG.GetComponent<PageHandler>().Build(currentPage, (prr.results.Count > 0), this);
+            currentSearchResults.Add(GoPG);
+            //We put in the search result list so it get clean/rebuild on the next Search
+        }
     }
 
     //Clean the search result
