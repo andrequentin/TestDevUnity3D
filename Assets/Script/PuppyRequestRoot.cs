@@ -3,6 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
+/*
+ * This is a container class to handle our JSON result from the API 
+ */
+
+
 public class PuppyRequestRoot
 {
     public string title { get; set; }

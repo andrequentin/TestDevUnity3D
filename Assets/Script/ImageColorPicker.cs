@@ -6,18 +6,24 @@ using UnityEngine.EventSystems;
 
 public class ImageColorPicker : MonoBehaviour, IPointerClickHandler
 {
+
+    //ImageColorPicker for the customization menu
     public Color selectedColor;
 
+
+    //Event for onclick event to select color and callback on click action
     [Serializable]
     public class ColorEvent : UnityEvent<Color> { }
     public ColorEvent OnColorPicked = new ColorEvent();
 
+    //On click -> get color , call calback action
     public void OnPointerClick(PointerEventData eventData)
     {
         selectedColor = GetColor(GetPointerUVPosition());
         OnColorPicked.Invoke(selectedColor);
     }
 
+    //Get the color at the pointer position
     private Color GetColor(Vector2 pos)
     {
         Texture2D texture = GetComponent<Image>().sprite.texture;
@@ -26,6 +32,7 @@ public class ImageColorPicker : MonoBehaviour, IPointerClickHandler
         return selected;
     }
 
+    //Get the pointer position as 2D coordinate of the image
     Vector2 GetPointerUVPosition()
     {
         Vector3[] imageCorners = new Vector3[4];

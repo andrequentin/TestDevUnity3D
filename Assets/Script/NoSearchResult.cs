@@ -10,6 +10,8 @@ public class NoSearchResult : MonoBehaviour
     [SerializeField]
     TMPro.TMP_Text ingredients;
 
+    //Nothing special here just a way to tell the user that there is no result for the current search
+
     public void Build(string keyword,List<string> ingredient)
     {
 

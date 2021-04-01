@@ -29,7 +29,7 @@ public class GameManager : MonoBehaviour
     public GameObject escapeCanvas;
 
 
-
+    //To be the only one gamanger
     private void Awake()
     {
         if (GameManager.Instance == null)
@@ -44,9 +44,8 @@ public class GameManager : MonoBehaviour
         GM = GameState.GAME;
 
     }
-    // Start is called before the first frame update
 
-    // Update is called once per frame
+    //To open an escape menu and leave application
     void Update()
     {
         if( Input.GetKey(KeyCode.Escape))
@@ -56,7 +55,7 @@ public class GameManager : MonoBehaviour
     }
     
   
-
+    //GameState transition
     public void Game()
     {
         GM = GameState.GAME;
