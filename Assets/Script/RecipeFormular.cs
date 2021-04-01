@@ -6,6 +6,13 @@ using UnityEngine.Networking;
 using TMPro;
 using Newtonsoft.Json;
 
+
+/*
+ * For
+ * 
+ * 
+ */
+
 public class RecipeFormular : MonoBehaviour
 {
     [SerializeField]
@@ -14,6 +21,8 @@ public class RecipeFormular : MonoBehaviour
     TMP_InputField ingredientField;
     [SerializeField]
     GameObject SingleResultPrefab;
+    [SerializeField]
+    GameObject NoResultPrefab;
     [SerializeField]
     GameObject ingredientPrefab;
     [SerializeField]
@@ -33,9 +42,6 @@ public class RecipeFormular : MonoBehaviour
         ingredients = new List<GameObject>();
         currentSearchResults = new List<GameObject>();
     }
-
-   
-
 
     void OnEnable()
     {
@@ -117,7 +123,6 @@ public class RecipeFormular : MonoBehaviour
         }
 
         query += "&p=" + page.ToString();
-        Debug.Log("Query : " + query);
         return query;
     }
 
@@ -138,7 +143,7 @@ public class RecipeFormular : MonoBehaviour
         PuppyRequestRoot result = new PuppyRequestRoot() ;
         if (request.result == UnityWebRequest.Result.ConnectionError || request.result == UnityWebRequest.Result.ProtocolError)
         {
-            //Debug.Log("Erreur : " + request.result.ToString());
+            Debug.Log("Erreur : " + request.result.ToString());
         }else
         {
             //Debug.Log("Success : \n" + request.downloadHandler.text);
@@ -151,18 +156,34 @@ public class RecipeFormular : MonoBehaviour
 
     public void DisplaySearchResult(PuppyRequestRoot result)
     {
-
         CleanSearchResult();
-        foreach(Result r in result.results)
+        if (result.results.Count > 1)
         {
-            GameObject Go = Instantiate(SingleResultPrefab, searchResultList.transform);
-            SearchResultOne sro = Go.GetComponent<SearchResultOne>();
-            sro.Build(r);
-            currentSearchResults.Add(Go);
+            foreach (Result r in result.results)
+            {
+                GameObject Go = Instantiate(SingleResultPrefab, searchResultList.transform);
+                SingleSearchResult sro = Go.GetComponent<SingleSearchResult>();
+                sro.Build(r);
+                currentSearchResults.Add(Go);
+            }
+
+            string query = BuildQuery(currentPage + 1);
+            StartCoroutine(Request(query, SetPageHandler));
+        }
+        else
+        {
+            List<string> ingredientsString = new List<string>();
+            foreach (GameObject g in ingredients)
+            {
+                ingredientsString.Add(g.name);
+            }
+            string searchFieldString = searchField.text;
+
+            GameObject GO = Instantiate(NoResultPrefab, searchResultList.transform);
+            GO.GetComponent<NoSearchResult>().Build(searchFieldString, ingredientsString);
+            currentSearchResults.Add(GO);
         }
 
-        string query = BuildQuery(currentPage + 1);
-        StartCoroutine(Request(query, SetPageHandler));
 
     }
     public void SetPageHandler(PuppyRequestRoot prr)

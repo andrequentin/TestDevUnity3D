@@ -12,11 +12,11 @@ public class OpenCanvasOnTrigger : MonoBehaviour
 
     void Start()
     {
-        CameraMoveToCanvasManager.Instance.RegisterCanvasTrigger(this);
+        CameraMoveOnTriggerManager.Instance.RegisterCanvasTrigger(this);
     }
     private void End()
     {
-        CameraMoveToCanvasManager.Instance.UnregisterCanvasTrigger(this);
+        CameraMoveOnTriggerManager.Instance.UnregisterCanvasTrigger(this);
     }
 
 
@@ -25,7 +25,7 @@ public class OpenCanvasOnTrigger : MonoBehaviour
     {
         if (c.gameObject.tag == "Player")
         {
-            CameraMoveToCanvasManager.Instance.RequestCamera(this);
+            CameraMoveOnTriggerManager.Instance.RequestCamera(this);
         }
     }
 
@@ -33,7 +33,7 @@ public class OpenCanvasOnTrigger : MonoBehaviour
     {
         if (c.gameObject.tag == "Player")
         {
-            CameraMoveToCanvasManager.Instance.EndOfRequest(this);
+            CameraMoveOnTriggerManager.Instance.EndOfRequest(this);
         }
     }
 

@@ -18,10 +18,10 @@ public class GameManager : MonoBehaviour
 
     public static GameManager Instance = null;
 
-    private static Player mainCharacter = null;
+    private static PlayerController mainCharacter = null;
 
   
-    public static Player MainCharacter{
+    public static PlayerController MainCharacter{
         get { return mainCharacter; }
         set { mainCharacter = value; }
     }

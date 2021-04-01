@@ -5,7 +5,7 @@ using UnityEngine.UI;
 using UnityEngine.Networking;
 using UnityEngine.EventSystems;
 
-public class SearchResultOne : MonoBehaviour, IPointerClickHandler
+public class SingleSearchResult : MonoBehaviour, IPointerClickHandler
 {
 
     public Event onClick;

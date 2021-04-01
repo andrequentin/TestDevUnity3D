@@ -2,19 +2,19 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CameraMoveToCanvasManager : MonoBehaviour
+public class CameraMoveOnTriggerManager : MonoBehaviour
 {
-    private static CameraMoveToCanvasManager instance = null;
+    private static CameraMoveOnTriggerManager instance = null;
 
-    public static CameraMoveToCanvasManager Instance
+    public static CameraMoveOnTriggerManager Instance
     {
         get
         {
-            if (CameraMoveToCanvasManager.instance == null)
+            if (CameraMoveOnTriggerManager.instance == null)
             {
-                CameraMoveToCanvasManager.instance = new CameraMoveToCanvasManager();
+                CameraMoveOnTriggerManager.instance = new CameraMoveOnTriggerManager();
             }
-            return CameraMoveToCanvasManager.instance;
+            return CameraMoveOnTriggerManager.instance;
         }
     }
 
@@ -40,7 +40,7 @@ public class CameraMoveToCanvasManager : MonoBehaviour
 
     private void Start()
     {
-        CameraMoveToCanvasManager.instance = this;
+        CameraMoveOnTriggerManager.instance = this;
     }
     public void RegisterCanvasTrigger(OpenCanvasOnTrigger toReg)
     {
